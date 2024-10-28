@@ -1,5 +1,5 @@
 import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
-import TableTwo from '../../components/Tables/tables/TableTwo';
+import TableTwo from '../../components/Tables/tables/TableUser';
 
 const Tables = () => {
   return (
