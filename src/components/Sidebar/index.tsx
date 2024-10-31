@@ -430,6 +430,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                         </svg>
                       </NavLink>
 
+<<<<<<< HEAD
                       {/* Dropdown Menu Start */}
                       <div
                         className={`translate transform overflow-hidden ${
@@ -466,6 +467,73 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   );
                 }}
               </SidebarLinkGroup>
+=======
+        {/* Dropdown Menu Start */}
+        <div className={`translate transform overflow-hidden ${!open && 'hidden'}`}>
+          <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
+            <li>
+              <NavLink
+                to="/tables/users"
+                className={({ isActive }) =>
+                  'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                  (isActive && '!text-white')
+                }
+              >
+                Table User
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/tables/image"
+                className={({ isActive }) =>
+                  'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                  (isActive && '!text-white')
+                }
+              >
+                Table Image
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/tables/bazzar"
+                className={({ isActive }) =>
+                  'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                  (isActive && '!text-white')
+                }
+              >
+                Table Bazzar
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/tables/transparency"
+                className={({ isActive }) =>
+                  'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                  (isActive && '!text-white')
+                }
+              >
+                Table Transparencia
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/tables/valuable"
+                className={({ isActive }) =>
+                  'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                  (isActive && '!text-white')
+                }
+              >
+                Table Voluntarios
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+        {/* Dropdown Menu End */}
+      </React.Fragment>
+    );
+  }}
+</SidebarLinkGroup>
+>>>>>>> 968dd2a441d53b917bcfea879bd5d71ea560b4ae
 
               {/* <!-- Menu Item Settings --> */}
               <li>

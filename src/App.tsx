@@ -12,6 +12,10 @@ import FormLayout from './pages/Form/FormLayout';
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
 import Tables from './pages/Table/tablesUser';
+import TablesImage from './pages/Table/tableImage';
+import TablesBazzar from './pages/Table/tableBazzar';
+import TablesTransparency from './pages/Table/tableTransparency';
+import TablesValuable from './pages/Table/tableValuable';
 import Alerts from './pages/UiElements/Alerts';
 import Buttons from './pages/UiElements/Buttons';
 import DefaultLayout from './layout/DefaultLayout';
@@ -93,6 +97,42 @@ function App() {
               <PageTitle title="Tables" />
               <Tables />
             </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/tables/image"
+          element={
+            <>
+              <PageTitle title="Tables | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <TablesImage />
+            </>
+          }
+        />
+        <Route
+          path="/tables/bazzar"
+          element={
+            <>
+              <PageTitle title="Tables | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <TablesBazzar />
+            </>
+          }
+        />
+        <Route
+          path="/tables/transparency"
+          element={
+            <>
+              <PageTitle title="Tables | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <TablesTransparency/>
+            </>
+          }
+        />
+        <Route
+          path="/tables/valuable"
+          element={
+            <>
+              <PageTitle title="Tables | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <TablesValuable/>
+            </>
           }
         />
         <Route
