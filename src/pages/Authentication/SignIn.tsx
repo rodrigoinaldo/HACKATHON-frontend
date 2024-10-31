@@ -7,40 +7,38 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const SignIn: React.FC = () => {
+  // Estado para armazenar email e senha
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
 
-    // Estado para armazenar email e senha
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
-    const navigate = useNavigate();
-  
-    // Função para envio do formulário
-    const handleSubmit = async (e: React.FormEvent) => {
-      e.preventDefault();
-      try {
-        const response = await axios.post('http://127.0.0.1:8000/api/login', {
-          email,
-          password,
-        });
-        
-        if (response.data.token) {
-          // Aqui você pode armazenar o token e redirecionar o usuário
-          console.log('Login bem-sucedido:', response.data);
+  // Função para envio do formulário
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/api/login', {
+        email,
+        password,
+      });
 
-          localStorage.setItem('token', response.data.token);
-          navigate('/Dashboard');
-        
+      if (response.data.token) {
+        // Aqui você pode armazenar o token e redirecionar o usuário
+        console.log('Login bem-sucedido:', response.data);
+
+        if (localStorage.getItem('token')) {
+          return <Navigate to="/Dashboard" replace />;
         }
-      } catch (error) {
-        console.error('Erro ao fazer login:', error);
-        setErrorMessage('Falha no login. Verifique suas credenciais.');
       }
-    };
-
+    } catch (error) {
+      console.error('Erro ao fazer login:', error);
+      setErrorMessage('Falha no login. Verifique suas credenciais.');
+    }
+  };
 
   return (
     <>
-      <Breadcrumb pageName="Sign In" />
+      <Breadcrumb pageName="Login" />
 
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
         <div className="flex flex-wrap items-center">
@@ -51,10 +49,7 @@ const SignIn: React.FC = () => {
                 <img className="dark:hidden" src={LogoDark} alt="Logo" />
               </Link>
 
-              <p className="2xl:px-20">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                suspendisse.
-              </p>
+              <p className="2xl:px-20">Faça Login para Acessar o Painel</p>
 
               <span className="mt-15 inline-block">
                 <svg
@@ -183,9 +178,9 @@ const SignIn: React.FC = () => {
 
           <div className="w-full border-stroke dark:border-strokedark xl:w-1/2 xl:border-l-2">
             <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
-              <span className="mb-1.5 block font-medium">Start for free</span>
+              <span className="mb-1.5 block font-medium">Efetuar login</span>
               <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
-                Sign In to TailAdmin
+                Faça Login no Painel
               </h2>
 
               <form onSubmit={handleSubmit}>
@@ -225,7 +220,7 @@ const SignIn: React.FC = () => {
 
                 <div className="mb-6">
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
-                     Password
+                    Password
                   </label>
                   <div className="relative">
                     <input
@@ -236,7 +231,9 @@ const SignIn: React.FC = () => {
                       onChange={(e) => setPassword(e.target.value)}
                       required
                     />
-                    {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+                    {errorMessage && (
+                      <p className="text-red-500">{errorMessage}</p>
+                    )}
 
                     <span className="absolute right-4 top-4">
                       <svg

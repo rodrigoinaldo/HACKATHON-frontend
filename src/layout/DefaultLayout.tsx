@@ -2,7 +2,15 @@ import React, { useState, ReactNode } from 'react';
 import Header from '../components/Header/index';
 import Sidebar from '../components/Sidebar/index';
 
-const DefaultLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
+interface DefaultLayoutProps {
+  children: ReactNode;
+  isAuthenticated: boolean; // Nova propriedade
+}
+
+const DefaultLayout: React.FC<DefaultLayoutProps> = ({
+  children,
+  isAuthenticated,
+}) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
@@ -10,7 +18,9 @@ const DefaultLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
       {/* <!-- ===== Page Wrapper Start ===== --> */}
       <div className="flex h-screen overflow-hidden">
         {/* <!-- ===== Sidebar Start ===== --> */}
-        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+        {isAuthenticated && ( // Renderiza o Sidebar apenas se o usuário estiver autenticado
+          <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+        )}
         {/* <!-- ===== Sidebar End ===== --> */}
 
         {/* <!-- ===== Content Area Start ===== --> */}
