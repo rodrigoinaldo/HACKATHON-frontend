@@ -445,6 +445,39 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 Table Image
               </NavLink>
             </li>
+            <li>
+              <NavLink
+                to="/tables/bazzar"
+                className={({ isActive }) =>
+                  'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                  (isActive && '!text-white')
+                }
+              >
+                Table Bazzar
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/tables/transparency"
+                className={({ isActive }) =>
+                  'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                  (isActive && '!text-white')
+                }
+              >
+                Table Transparencia
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/tables/valuable"
+                className={({ isActive }) =>
+                  'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                  (isActive && '!text-white')
+                }
+              >
+                Table Voluntarios
+              </NavLink>
+            </li>
           </ul>
         </div>
         {/* Dropdown Menu End */}

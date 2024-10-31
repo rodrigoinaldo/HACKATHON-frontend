@@ -8,16 +8,16 @@ interface Image {
 }
 
 const TableTwo = () => {
-  const [image, setImage] = useState<Image[]>([]);
+  const [bazzar, setBazzar] = useState<Image[]>([]);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/image/index')
+    fetch('http://127.0.0.1:8000/api/bazzar/index')
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
         // Acesse o array de usuários em 'data.messagem' em vez de 'data'
         if (Array.isArray(data)) {
-          setImage(data); // Ajustado para definir `data` diretamente como o estado
+            setBazzar(data); // Ajustado para definir `data` diretamente como o estado
         } else {
           console.error('Estrutura inesperada da resposta da API:', data);
         }
@@ -30,7 +30,7 @@ const TableTwo = () => {
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
       <div className="py-6 px-4 md:px-6 xl:px-7.5">
         <h4 className="text-xl font-semibold text-black dark:text-white">
-          Lsta de Imagens
+          Produtos do bazar
         </h4>
       </div>
 
@@ -38,38 +38,19 @@ const TableTwo = () => {
         <div className="col-span-3 flex items-center">
           <p className="font-medium">image</p>
         </div>
-        <div className="col-span-2 hidden items-center sm:flex">
-          <p className="font-medium">Nome</p>
-        </div>
-        <div className="col-span-1 flex items-center">
-          <p className="font-medium">Email</p>
-        </div>
       </div>
 
-      {image.map((image) => (
+      {bazzar.map((bazzar) => (
         <div
           className="grid grid-cols-6 border-t border-stroke py-4.5 px-4 dark:border-strokedark sm:grid-cols-8 md:px-6 2xl:px-7.5"
-          key={image.id}
+          key={bazzar.id}
         >
           <div className="col-span-3 flex items-center">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
               <div className="h-12.5 w-15 rounded-md">
-                <img src={image.image} alt="image" />
+                <img src={bazzar.image} alt="image" />
               </div>
-              <p className="text-sm text-black dark:text-white">
-                {image.name}
-              </p>
             </div>
-          </div>
-          <div className="col-span-2 hidden items-center sm:flex">
-            <p className="text-sm text-black dark:text-white">
-              {image.name}
-            </p>
-          </div>
-          <div className="col-span-1 flex items-center">
-            <p className="text-sm text-black dark:text-white">
-              {image.description}
-            </p>
           </div>
         </div>
       ))}
