@@ -27,6 +27,8 @@ import InsurtImage from './pages/crud/InsurtImage';
 import InsurtOwner from './pages/crud/insurtOwner';
 import InsurtTransparency from './pages/crud/InsurtTransparency';
 import InsurtValuable from './pages/crud/InsurtValuable';
+import TableEvent from './components/Tables/tables/TableEvent';
+import InsurtEvents from './pages/crud/InsurtEvents';
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false); // Estado de autenticação
@@ -151,6 +153,15 @@ function App() {
           }
         />
         <Route
+          path="/tables/event"
+          element={
+            <>
+              <PageTitle title="Tables | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <TableEvent/>
+            </>
+          }
+        />
+        <Route
           path="/settings"
           element={
             <ProtectedRoute>
@@ -246,6 +257,15 @@ function App() {
             <>
               <PageTitle title="insurt" />
               <InsurtValuable/>
+            </>
+          }
+        />
+        <Route
+          path="/insurt/event"
+          element={
+            <>
+              <PageTitle title="insurt" />
+              <InsurtEvents/>
             </>
           }
         />

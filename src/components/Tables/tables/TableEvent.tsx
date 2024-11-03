@@ -1,26 +1,26 @@
 import { useEffect, useState } from 'react';
-import { IoIosAddCircle, IoMdDownload } from "react-icons/io";
 import RedirectButton from '../../button/RedirectButton';
+import { IoIosAddCircle } from 'react-icons/io';
 import { FaTrash } from 'react-icons/fa';
 
-interface Transparency {
+interface Eventos {
   id: number;
   name: string;
-  file: string;
+  image: string;
   description: string
 }
 
-const TableTwo = () => {
-  const [transparency, setTransparency] = useState<Transparency[]>([]);
+const TableEvent = () => {
+  const [event, setEvent] = useState<Eventos[]>([]);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/transparency/index')
+    fetch('http://127.0.0.1:8000/api/events/index')
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
         // Acesse o array de usuários em 'data.messagem' em vez de 'data'
         if (Array.isArray(data)) {
-            setTransparency(data); // Ajustado para definir `data` diretamente como o estado
+            setEvent(data); // Ajustado para definir `data` diretamente como o estado
         } else {
           console.error('Estrutura inesperada da resposta da API:', data);
         }
@@ -31,7 +31,7 @@ const TableTwo = () => {
 
   const handleDelete = async (id: number) => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/transparency/${id}/delete`, {
+      const response = await fetch(`http://127.0.0.1:8000/api/events/${id}/delete`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ const TableTwo = () => {
       });
 
       if (response.ok) {
-        setTransparency((prevBazzar) => prevBazzar.filter((item) => item.id !== id));
+        setEvent((prevBazzar) => prevBazzar.filter((item) => item.id !== id));
         console.log('Produto excluído com sucesso!');
       } else {
         console.error('Erro ao excluir o produto');
@@ -53,57 +53,57 @@ const TableTwo = () => {
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
       <div className="py-6 px-4 md:px-6 xl:px-7.5">
         <h4 className="text-xl font-semibold text-black dark:text-white">
-          Lsta de Transparencias
+          Lsta de Eventos
         </h4>
 
         <div className="ml-auto h-12.5 w-15 rounded-md">
-              <RedirectButton 
-                  path="/insurt/transparency"
-                  icon={<IoIosAddCircle/> }
-                />
+          <RedirectButton 
+            path="/insurt/event"
+            icon={<IoIosAddCircle/> }
+            />
         </div>
 
       </div>
 
       <div className="grid grid-cols-6 border-t border-stroke py-4.5 px-4 dark:border-strokedark sm:grid-cols-8 md:px-6 2xl:px-7.5">
         <div className="col-span-3 flex items-center">
-          <p className="font-medium">File</p>
+          <p className="font-medium">image</p>
         </div>
-        <div className="col-span-1 flex items-center">
-          <p className="font-medium">Descriçãos</p>
+        <div className="col-span-2 hidden items-center sm:flex">
+          <p className="font-medium">dexcription</p>
         </div>
       </div>
 
-      {transparency.map((transparency) => (
+      {event.map((event) => (
         <div
           className="grid grid-cols-6 border-t border-stroke py-4.5 px-4 dark:border-strokedark sm:grid-cols-8 md:px-6 2xl:px-7.5"
-          key={transparency.id}
+          key={event.id}
         >
           <div className="col-span-3 flex items-center">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
               <div className="h-12.5 w-15 rounded-md">
-                <a href={transparency.file}><IoMdDownload /></a>
+                <img src={event.image} alt="image" />
               </div>
               <p className="text-sm text-black dark:text-white">
-                {transparency.name}
+                {event.name}
               </p>
             </div>
           </div>
           <div className="col-span-1 flex items-center">
             <p className="text-sm text-black dark:text-white">
-              {transparency.description}
+              {event.description}
             </p>
           </div>
 
           <div className="ml-auto h-12.5 w-15 rounded-md">
-                <button onClick={() => handleDelete(transparency.id)}>
-                  <FaTrash size={20} />
+                <button onClick={() => handleDelete(event.id)}>
+                  <FaTrash size={40 } />
                 </button>
-          </div>
+              </div>
         </div>
       ))}
     </div>
   );
 };
 
-export default TableTwo;
+export default TableEvent;

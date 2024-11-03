@@ -32,7 +32,7 @@ const TablePosition = () => {
 
   const handleDelete = async (id: number) => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/bazzar/${id}/delete`, {
+      const response = await fetch(`http://127.0.0.1:8000/api/position/${id}/delete`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

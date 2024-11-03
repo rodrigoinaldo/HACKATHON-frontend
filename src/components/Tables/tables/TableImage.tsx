@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import RedirectButton from '../../button/RedirectButton';
 import { IoIosAddCircle } from 'react-icons/io';
+import { FaTrash } from 'react-icons/fa';
 
 interface Image {
   id: number;
@@ -27,6 +28,26 @@ const TableTwo = () => {
       .catch((error) => console.error('Erro ao buscar usuários:', error));
 
   }, []);
+
+  const handleDelete = async (id: number) => {
+    try {
+      const response = await fetch(`http://127.0.0.1:8000/api/image/${id}/delete`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        setImage((prevBazzar) => prevBazzar.filter((item) => item.id !== id));
+        console.log('Produto excluído com sucesso!');
+      } else {
+        console.error('Erro ao excluir o produto');
+      }
+    } catch (error) {
+      console.error('Erro:', error);
+    }
+  };
 
   return (
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
@@ -81,6 +102,12 @@ const TableTwo = () => {
               {image.description}
             </p>
           </div>
+
+          <div className="ml-auto h-12.5 w-15 rounded-md">
+                <button onClick={() => handleDelete(image.id)}>
+                  <FaTrash size={40 } />
+                </button>
+              </div>
         </div>
       ))}
     </div>
