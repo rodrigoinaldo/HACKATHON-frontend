@@ -20,7 +20,13 @@ import Alerts from './pages/UiElements/Alerts';
 import Buttons from './pages/UiElements/Buttons';
 import DefaultLayout from './layout/DefaultLayout';
 import ProtectedRoute from './components/ProtectedRoute';
-
+import Insurt from './pages/crud/InsurtBazzar';
+// import { Table } from './components/TableSettings';
+import TablePosition from './components/Tables/tables/TablePosition';
+import InsurtImage from './pages/crud/InsurtImage';
+import InsurtOwner from './pages/crud/insurtOwner';
+import InsurtTransparency from './pages/crud/InsurtTransparency';
+import InsurtValuable from './pages/crud/InsurtValuable';
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false); // Estado de autenticação
@@ -46,13 +52,13 @@ function App() {
       {/* Passa o estado de autenticação */}
       <Routes>
         <Route
-          path="/Dashboard"
+          path="/ecommerce"
           element={
-            <ProtectedRoute>
-              <PageTitle title="eCommerce Dashboard" />
+            <>
+              <PageTitle title="eCommerce Dashboard | TailAdmin - Tailwind CSS Admin Dashboard Template" />
               <ECommerce />
-            </ProtectedRoute>
-          }
+            </>
+            }
         />
         <Route
           path="/calendar"
@@ -93,10 +99,10 @@ function App() {
         <Route
           path="/tables/users"
           element={
-            <ProtectedRoute>
-              <PageTitle title="Tables" />
-              <Tables />
-            </ProtectedRoute>
+            <>
+            <PageTitle title="Tables | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+            <Tables />
+          </>
           }
         />
         <Route
@@ -132,6 +138,15 @@ function App() {
             <>
               <PageTitle title="Tables | TailAdmin - Tailwind CSS Admin Dashboard Template" />
               <TablesValuable/>
+            </>
+          }
+        />
+        <Route
+          path="/tables/position"
+          element={
+            <>
+              <PageTitle title="Tables | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <TablePosition/>
             </>
           }
         />
@@ -186,6 +201,51 @@ function App() {
             <>
               <PageTitle title="Signup" />
               <SignUp />
+            </>
+          }
+        />
+        <Route
+          path="/insurt/bazzar"
+          element={
+            <>
+              <PageTitle title="insurt" />
+              <Insurt/>
+            </>
+          }
+        />
+        <Route
+          path="/insurt/image"
+          element={
+            <>
+              <PageTitle title="insurt" />
+              <InsurtImage/>
+            </>
+          }
+        />
+        <Route
+          path="/insurt/owner"
+          element={
+            <>
+              <PageTitle title="insurt" />
+              <InsurtOwner/>
+            </>
+          }
+        />
+        <Route
+          path="/insurt/transparency"
+          element={
+            <>
+              <PageTitle title="insurt" />
+              <InsurtTransparency/>
+            </>
+          }
+        />
+        <Route
+          path="/insurt/voluable"
+          element={
+            <>
+              <PageTitle title="insurt" />
+              <InsurtValuable/>
             </>
           }
         />

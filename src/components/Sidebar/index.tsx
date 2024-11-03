@@ -17,7 +17,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
   const storedSidebarExpanded = localStorage.getItem('sidebar-expanded');
   const [sidebarExpanded, setSidebarExpanded] = useState(
-    storedSidebarExpanded === null ? false : storedSidebarExpanded === 'true',
+    storedSidebarExpanded === null ? false : storedSidebarExpanded === 'true'
   );
 
   // close on click outside
@@ -104,9 +104,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
             <ul className="mb-6 flex flex-col gap-1.5">
               {/* <!-- Menu Item Dashboard --> */}
               <SidebarLinkGroup
-                activeCondition={
-                  pathname === '/' || pathname.includes('dashboard')
-                }
+                  activeCondition={
+                    pathname === '/' || pathname.includes('dashboard')
+                  }
               >
                 {(handleClick, open) => {
                   return (
@@ -178,7 +178,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                         <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
                           <li>
                             <NavLink
-                              to="/Dashboard"
+                              to="/ecommerce"
                               className={({ isActive }) =>
                                 'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
                                 (isActive && '!text-white')
@@ -362,7 +362,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               </SidebarLinkGroup>
               {/* <!-- Menu Item Forms --> */}
 
-              {/* Menu Item Tables */}
+              {/* <!-- Menu Item Tables --> */}
               <SidebarLinkGroup
                 activeCondition={
                   pathname === '/tables' || pathname.includes('tables')
@@ -430,16 +430,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                         </svg>
                       </NavLink>
 
-<<<<<<< HEAD
-                      {/* Dropdown Menu Start */}
-                      <div
-                        className={`translate transform overflow-hidden ${
-                          !open && 'hidden'
-                        }`}
-                      >
-                        <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
-                          <li>
-                            <NavLink
+        {/* Dropdown Menu Start */}
+        <div className={`translate transform overflow-hidden ${!open && 'hidden'}`}>
+          <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
+            <li>
+            <NavLink
                               to="/tables/users"
                               className={({ isActive }) =>
                                 'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
@@ -447,39 +442,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               }
                             >
                               Table User
-                            </NavLink>
-                          </li>
-                          <li>
-                            <NavLink
-                              to="/tables/table-advanced"
-                              className={({ isActive }) =>
-                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
-                                (isActive && '!text-white')
-                              }
-                            >
-                              Table Advanced
-                            </NavLink>
-                          </li>
-                        </ul>
-                      </div>
-                      {/* Dropdown Menu End */}
-                    </React.Fragment>
-                  );
-                }}
-              </SidebarLinkGroup>
-=======
-        {/* Dropdown Menu Start */}
-        <div className={`translate transform overflow-hidden ${!open && 'hidden'}`}>
-          <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
-            <li>
-              <NavLink
-                to="/tables/users"
-                className={({ isActive }) =>
-                  'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
-                  (isActive && '!text-white')
-                }
-              >
-                Table User
               </NavLink>
             </li>
             <li>
@@ -526,14 +488,28 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 Table Voluntarios
               </NavLink>
             </li>
+            <li>
+              <NavLink
+                to="/tables/position"
+                className={({ isActive }) =>
+                  'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                  (isActive && '!text-white')
+                }
+              >
+                Table position
+              </NavLink>
+            </li>
           </ul>
         </div>
         {/* Dropdown Menu End */}
-      </React.Fragment>
-    );
-  }}
-</SidebarLinkGroup>
->>>>>>> 968dd2a441d53b917bcfea879bd5d71ea560b4ae
+
+                    </React.Fragment>
+                  );
+                }}
+              </SidebarLinkGroup>
+
+
+              {/* <!-- Menu Item Tables --> */}
 
               {/* <!-- Menu Item Settings --> */}
               <li>

@@ -1,5 +1,7 @@
 
 import { useEffect, useState } from 'react';
+import RedirectButton from '../../button/RedirectButton';
+import { IoIosAddCircle } from 'react-icons/io';
 
 interface valuable {
   id: number;
@@ -31,6 +33,13 @@ const TableTwo = () => {
         <h4 className="text-xl font-semibold text-black dark:text-white">
           Lista de Voluntarios
         </h4>
+
+        <div className="ml-auto h-12.5 w-15 rounded-md">
+              <RedirectButton 
+                  path="/insurt/voluable"
+                  icon={<IoIosAddCircle/> }
+                />
+        </div>
       </div>
 
       <div className="grid grid-cols-6 border-t border-stroke py-4.5 px-4 dark:border-strokedark sm:grid-cols-8 md:px-6 2xl:px-7.5">
