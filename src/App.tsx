@@ -78,7 +78,7 @@ function App() {
           path="/profile"
           element={
             <ProtectedRoute>
-              <PageTitle title="Profile" />
+              <PageTitle title="Profyile" />
               <Profile />
             </ProtectedRoute>
           }
