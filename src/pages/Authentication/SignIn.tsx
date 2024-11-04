@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
 import LogoDark from '../../images/logo/logo-dark.svg';
 import Logo from '../../images/logo/logo.svg';
@@ -22,9 +22,10 @@ const SignIn: React.FC = () => {
         password,
       });
 
-      if (response.data.token) {
+      // console.log(JSON.stringify(response.data, null, 2));
+      if (response.data) {
         // Store token in localStorage and navigate to Dashboard
-        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('token', response.data);
         console.log('Login bem-sucedido:', response.data);
         navigate('/Dashboard');
       }
