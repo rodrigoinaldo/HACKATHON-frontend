@@ -23,12 +23,10 @@ const SignIn: React.FC = () => {
       });
 
       if (response.data.token) {
-        // Aqui você pode armazenar o token e redirecionar o usuário
+        // Store token in localStorage and navigate to Dashboard
+        localStorage.setItem('token', response.data.token);
         console.log('Login bem-sucedido:', response.data);
-
-        if (localStorage.getItem('token')) {
-          return <Navigate to="/Dashboard" replace />;
-        }
+        navigate('/Dashboard');
       }
     } catch (error) {
       console.error('Erro ao fazer login:', error);
