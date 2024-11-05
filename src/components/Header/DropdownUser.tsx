@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ClickOutside from '../ClickOutside';
-import UserOne from '../../images/user/user-01.png';
+import UserOne from './logo.svg';
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -15,9 +15,9 @@ const DropdownUser = () => {
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-            Thomas Anree
+            User 
           </span>
-          <span className="block text-xs">UX Designer</span>
+          <span className="block text-xs">Administrador</span>
         </span>
 
         <span className="h-12 w-12 rounded-full">
@@ -69,7 +69,7 @@ const DropdownUser = () => {
                     fill=""
                   />
                 </svg>
-                My Profile
+                Meu Perfil
               </Link>
             </li>
             <li>
@@ -90,7 +90,7 @@ const DropdownUser = () => {
                     fill=""
                   />
                 </svg>
-                My Contacts
+                Meus Contatos
               </Link>
             </li>
             <li>
