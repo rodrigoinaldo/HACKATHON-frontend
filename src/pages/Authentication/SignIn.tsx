@@ -20,8 +20,8 @@ const SignIn: React.FC = () => {
         password,
       });
 
-      if (response.data.token) {
-        localStorage.setItem('token', response.data.token);
+      if (response.data) {
+        localStorage.setItem('token', response.data);
         navigate('/ecommerce');
       }
     } catch (error) {
