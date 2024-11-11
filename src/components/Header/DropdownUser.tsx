@@ -9,7 +9,7 @@ const DropdownUser = () => {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    localStorage.removeItem('authToken');
+    localStorage.removeItem('token');
     // Redirecione para a tela de login
     navigate('/');
   };
