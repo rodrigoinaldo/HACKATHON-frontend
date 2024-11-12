@@ -6,7 +6,7 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-  // Verifica se o usuário está autenticado. Isso pode ser adaptado para verificar o estado global, localStorage, etc.
+  // Verifica a presença do token no localStorage para determinar se o usuário está autenticado
   const isAuthenticated = Boolean(localStorage.getItem('authToken'));
 
   if (!isAuthenticated) {

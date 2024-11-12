@@ -1,8 +1,9 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 
 const InsurtImage: React.FC = () => {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [image, setImage] = useState<File | null>(null);
+  const [selectedImages, setSelectedImages] = useState<string[]>([]);
+  const [images, setImages] = useState<File[]>([]);
   const [nome, setNome] = useState<string>('');
   const [descricao, setDescricao] = useState<string>('');
   const [message, setMessage] = useState<string | null>(null);
@@ -10,28 +11,33 @@ const InsurtImage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!image) {
-      setMessage('Selecione uma imagem para enviar.');
+    if (images.length === 0) {
+      setMessage('Selecione pelo menos uma imagem para enviar.');
       return;
     }
 
     const formData = new FormData();
     formData.append('name', nome);
     formData.append('description', descricao);
-    formData.append('image', image);
+
+    // Adiciona todas as imagens no formData
+    images.forEach((image, index) => {
+      formData.append(`image${index + 1}`, image); // cada imagem terá um nome único no formData
+    });
 
     try {
+      
       const response = await fetch('http://127.0.0.1:8000/api/image', {
         method: 'POST',
         body: formData,
       });
-
-      if (response.ok) {
-        setImage(null);
-        setSelectedImage(null);
+      
+      if (response) {
+        setImages([]);
+        setSelectedImages([]);
         setNome('');
         setDescricao('');
-        setMessage('Produto inserido com sucesso!');
+        setMessage('imagem inserido com sucesso!');
       } else {
         setMessage('Erro ao inserir produto');
       }
@@ -42,10 +48,11 @@ const InsurtImage: React.FC = () => {
   };
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      const file = event.target.files[0];
-      setSelectedImage(URL.createObjectURL(file));
-      setImage(file);
+    if (event.target.files) {
+      const files = Array.from(event.target.files).slice(0, 5); 
+    
+      setImages(files);
+      setSelectedImages(files.map(file => URL.createObjectURL(file)));
     }
   };
 
@@ -84,12 +91,17 @@ const InsurtImage: React.FC = () => {
           <input
             type="file"
             accept="image/*"
+            multiple
             className="absolute inset-0 z-50 m-0 h-full w-full cursor-pointer p-0 opacity-0 outline-none"
             onChange={handleImageChange}
           />
           <div className="flex flex-col items-center justify-center space-y-3">
-            {selectedImage ? (
-              <img src={selectedImage} alt="Preview" className="w-32 h-32 rounded" />
+            {selectedImages.length > 0 ? (
+              <div className="grid grid-cols-5 gap-2">
+                {selectedImages.map((src, index) => (
+                  <img key={index} src={src} alt={`Preview ${index + 1}`} className="w-20 h-20 rounded" />
+                ))}
+              </div>
             ) : (
               <>
                 <span className="flex h-10 w-10 items-center justify-center rounded-full border border-stroke bg-white dark:border-strokedark dark:bg-boxdark">

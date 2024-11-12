@@ -12,6 +12,7 @@ const DropdownUser = () => {
     localStorage.removeItem('token');
     // Redirecione para a tela de login
     navigate('/');
+    window.location.reload();
   };
 
   return (
