@@ -57,7 +57,7 @@ const TableTwo = () => {
       <div className="py-6 px-4 md:px-6 xl:px-7.5">
 
         <h4 className="text-xl font-semibold text-black dark:text-white">
-          Produtos do bazar
+          Produtos do Bazar
         </h4>
 
         <div className="ml-auto h-12.5 w-15 rounded-md">

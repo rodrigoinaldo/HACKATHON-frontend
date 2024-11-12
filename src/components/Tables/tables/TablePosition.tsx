@@ -56,7 +56,7 @@ const TablePosition = () => {
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
       <div className="py-6 px-4 md:px-6 xl:px-7.5">
         <h4 className="text-xl font-semibold text-black dark:text-white">
-          Chefes
+          Equipe
         </h4>
 
         <div className="ml-auto h-12.5 w-15 rounded-md">
