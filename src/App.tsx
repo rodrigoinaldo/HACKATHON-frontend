@@ -60,7 +60,7 @@ function App() {
           path="/ecommerce"
           element={
             <>
-              <PageTitle title="eCommerce Dashboard | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="eCommerce" />
               <ECommerce />
             </>
             }
@@ -68,17 +68,17 @@ function App() {
         <Route
           path="/calendar"
           element={
-            <ProtectedRoute>
-              <PageTitle title="Calendar" />
+            <>
+              <PageTitle title="Calendario" />
               <Calendar />
-            </ProtectedRoute>
+            </>
           }
         />
         <Route
           path="/profile"
           element={
             <ProtectedRoute>
-              <PageTitle title="Profyile" />
+              <PageTitle title="Perfil" />
               <Profile />
             </ProtectedRoute>
           }
@@ -87,7 +87,7 @@ function App() {
           path="/forms/form-elements"
           element={
             <ProtectedRoute>
-              <PageTitle title="Form Elements" />
+              <PageTitle title="Elementos do Formulario" />
               <FormElements />
             </ProtectedRoute>
           }
@@ -96,7 +96,7 @@ function App() {
           path="/forms/form-layout"
           element={
             <ProtectedRoute>
-              <PageTitle title="Form Layout" />
+              <PageTitle title="Layout do Formulario" />
               <FormLayout />
             </ProtectedRoute>
           }
@@ -105,7 +105,7 @@ function App() {
           path="/tables/users"
           element={
             <>
-            <PageTitle title="Tables | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+            <PageTitle title="Tabela" />
             <Tables />
           </>
           }
@@ -114,7 +114,7 @@ function App() {
           path="/tables/image"
           element={
             <>
-              <PageTitle title="Tables | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Tabela Imagens" />
               <TablesImage />
             </>
           }
@@ -123,7 +123,7 @@ function App() {
           path="/tables/bazzar"
           element={
             <>
-              <PageTitle title="Tables | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Tabela Bazzar" />
               <TablesBazzar />
             </>
           }
@@ -132,7 +132,7 @@ function App() {
           path="/tables/transparency"
           element={
             <>
-              <PageTitle title="Tables | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Tabela Transparência" />
               <TablesTransparency/>
             </>
           }
@@ -141,7 +141,7 @@ function App() {
           path="/tables/valuable"
           element={
             <>
-              <PageTitle title="Tables | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Tabela Valor" />
               <TablesValuable/>
             </>
           }
@@ -150,7 +150,7 @@ function App() {
           path="/tables/position"
           element={
             <>
-              <PageTitle title="Tables | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Tabela" />
               <TablePosition/>
             </>
           }
@@ -159,7 +159,7 @@ function App() {
           path="/tables/event"
           element={
             <>
-              <PageTitle title="Tables | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Tabela de Eventos" />
               <TableEvent/>
             </>
           }
@@ -168,7 +168,7 @@ function App() {
           path="/tables/AboutUs"
           element={
             <>
-              <PageTitle title="Tables | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Tabela Sobre Nós" />
               <TableAboutUs/>
             </>
           }
@@ -177,7 +177,7 @@ function App() {
           path="/settings"
           element={
             <ProtectedRoute>
-              <PageTitle title="Settings" />
+              <PageTitle title="Configurações" />
               <Settings />
             </ProtectedRoute>
           }
@@ -186,7 +186,7 @@ function App() {
           path="/chart"
           element={
             <ProtectedRoute>
-              <PageTitle title="Basic Chart" />
+              <PageTitle title="Gráfico Básico" />
               <Chart />
             </ProtectedRoute>
           }
@@ -195,7 +195,7 @@ function App() {
           path="/ui/alerts"
           element={
             <ProtectedRoute>
-              <PageTitle title="Alerts" />
+              <PageTitle title="Alertas" />
               <Alerts />
             </ProtectedRoute>
           }
@@ -204,7 +204,7 @@ function App() {
           path="/ui/buttons"
           element={
             <ProtectedRoute>
-              <PageTitle title="Buttons" />
+              <PageTitle title="Botões" />
               <Buttons />
             </ProtectedRoute>
           }
@@ -213,7 +213,7 @@ function App() {
           index
           element={
             <>
-              <PageTitle title="Signin" />
+              <PageTitle title="Painel Casa da Paz" />
               <SignIn />
             </>
           }
@@ -222,7 +222,7 @@ function App() {
           path="/auth/signup"
           element={
             <>
-              <PageTitle title="Signup" />
+              <PageTitle title="Inscrever-se" />
               <SignUp />
             </>
           }

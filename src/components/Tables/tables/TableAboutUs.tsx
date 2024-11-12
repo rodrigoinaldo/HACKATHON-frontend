@@ -34,7 +34,7 @@ const TableAboutUs = () => {
       <div className="py-6 px-4 md:px-6 xl:px-7.5">
 
         <h4 className="text-xl font-semibold text-black dark:text-white">
-          Sobre nos
+          Sobre Nós
         </h4>
 
       </div>

@@ -440,7 +440,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                                 (isActive && '!text-white')
                               }
                             >
-                              Table User
+                              Tabela de Usuario
               </NavLink>
             </li>
             <li>
@@ -451,7 +451,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   (isActive && '!text-white')
                 }
               >
-                Table Image
+                Table de Imagem
               </NavLink>
             </li>
             <li>
@@ -462,7 +462,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   (isActive && '!text-white')
                 }
               >
-                Table Bazzar
+                Tabela Bazzar
               </NavLink>
             </li>
             <li>
@@ -473,7 +473,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   (isActive && '!text-white')
                 }
               >
-                Table Transparencia
+                Tabela Transparência
               </NavLink>
             </li>
             <li>
@@ -484,7 +484,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   (isActive && '!text-white')
                 }
               >
-                Table Voluntarios
+                Tabela de Voluntarios
               </NavLink>
             </li>
             <li>
@@ -495,7 +495,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   (isActive && '!text-white')
                 }
               >
-                Table position
+                Equipe
               </NavLink>
             </li>
             <li>
@@ -506,7 +506,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   (isActive && '!text-white')
                 }
               >
-                Table Eventos
+                Tabela de Eventos
               </NavLink>
             </li>
             <li>
@@ -517,7 +517,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   (isActive && '!text-white')
                 }
               >
-                Table Sobre Nos
+                Tabela Sobre Nos
               </NavLink>
             </li>
           </ul>

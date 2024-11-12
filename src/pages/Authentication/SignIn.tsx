@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
-import Logo from '../../images/logo/logo.svg';
+// import Logo from '../../images/logo/logo.svg';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import LoginImage from './logo.svg';
@@ -20,8 +20,8 @@ const SignIn: React.FC = () => {
         password,
       });
 
-      if (response.data.token) {
-        localStorage.setItem('token', response.data.token);
+      if (response.data) {
+        localStorage.setItem('token', response.data);
         navigate('/ecommerce');
       }
     } catch (error) {
