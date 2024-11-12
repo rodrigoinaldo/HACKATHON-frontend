@@ -7,7 +7,7 @@ interface Image {
   id: number;
   name: string;
   image: string;
-  description: string
+  description: string;
 }
 
 const TableTwo = () => {
@@ -18,15 +18,13 @@ const TableTwo = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        // Acesse o array de usuários em 'data.messagem' em vez de 'data'
         if (Array.isArray(data)) {
-          setImage(data); // Ajustado para definir `data` diretamente como o estado
+          setImage(data);
         } else {
           console.error('Estrutura inesperada da resposta da API:', data);
         }
       })
       .catch((error) => console.error('Erro ao buscar usuários:', error));
-
   }, []);
 
   const handleDelete = async (id: number) => {
@@ -39,7 +37,7 @@ const TableTwo = () => {
       });
 
       if (response.ok) {
-        setImage((prevBazzar) => prevBazzar.filter((item) => item.id !== id));
+        setImage((prevImage) => prevImage.filter((item) => item.id !== id));
         console.log('Produto excluído com sucesso!');
       } else {
         console.error('Erro ao excluir o produto');
@@ -60,56 +58,57 @@ const TableTwo = () => {
           <RedirectButton 
             path="/insurt/image"
             icon={<IoIosAddCircle/> }
-            />
+          />
         </div>
-
       </div>
 
       <div className="grid grid-cols-6 border-t border-stroke py-4.5 px-4 dark:border-strokedark sm:grid-cols-8 md:px-6 2xl:px-7.5">
         <div className="col-span-3 flex items-center">
-          <p className="font-medium">image</p>
+          <p className="font-medium">Imagem</p>
         </div>
         <div className="col-span-2 hidden items-center sm:flex">
           <p className="font-medium">Nome</p>
         </div>
         <div className="col-span-1 flex items-center">
-          <p className="font-medium">Email</p>
+          <p className="font-medium">Descrição</p>
         </div>
       </div>
 
-      {image.map((image) => (
-        <div
-          className="grid grid-cols-6 border-t border-stroke py-4.5 px-4 dark:border-strokedark sm:grid-cols-8 md:px-6 2xl:px-7.5"
-          key={image.id}
-        >
-          <div className="col-span-3 flex items-center">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-              <div className="h-12.5 w-15 rounded-md">
-                <img src={image.image} alt="image" />
+      {image.map((image) => {
+        return (
+          <div
+            className="grid grid-cols-6 border-t border-stroke py-4.5 px-4 dark:border-strokedark sm:grid-cols-8 md:px-6 2xl:px-7.5"
+            key={image.id}
+          >
+            <div className="col-span-3 flex items-center">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+                <div className="h-12.5 w-15 rounded-md">
+                  <img src={image.image} alt="Imagem" />
+                </div>
+                <p className="text-sm text-black dark:text-white">
+                  {image.name}
+                </p>
               </div>
+            </div>
+            <div className="col-span-2 hidden items-center sm:flex">
               <p className="text-sm text-black dark:text-white">
                 {image.name}
               </p>
             </div>
-          </div>
-          <div className="col-span-2 hidden items-center sm:flex">
-            <p className="text-sm text-black dark:text-white">
-              {image.name}
-            </p>
-          </div>
-          <div className="col-span-1 flex items-center">
-            <p className="text-sm text-black dark:text-white">
-              {image.description}
-            </p>
-          </div>
+            <div className="col-span-1 flex items-center">
+              <p className="text-sm text-black dark:text-white">
+                {image.description}
+              </p>
+            </div>
 
-          <div className="ml-auto h-12.5 w-15 rounded-md">
-                <button onClick={() => handleDelete(image.id)}>
-                  <FaTrash size={40 } />
-                </button>
-              </div>
-        </div>
-      ))}
+            <div className="ml-auto h-12.5 w-15 rounded-md">
+              <button onClick={() => handleDelete(image.id)}>
+                <FaTrash size={40} />
+              </button>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 };
