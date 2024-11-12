@@ -69,7 +69,11 @@ function App() {
           path="/calendar"
           element={
             <>
+<<<<<<< HEAD
               <PageTitle title="Calendario" />
+=======
+              <PageTitle title="Calendar" />
+>>>>>>> 2d1514796abb439278e98fd8bfbacf3925e0d617
               <Calendar />
             </>
           }
