@@ -21,25 +21,24 @@ const InsurtImage: React.FC = () => {
     formData.append('description', descricao);
 
     // Adiciona todas as imagens no formData
-    images.forEach((image, index) => {
-      formData.append(`image${index + 1}`, image); // cada imagem terá um nome único no formData
+    images.forEach((image) => {
+      formData.append('images[]', image); // usando 'images[]' para corresponder ao backend
     });
 
     try {
-      
       const response = await fetch('http://127.0.0.1:8000/api/image', {
         method: 'POST',
         body: formData,
       });
       
-      if (response) {
+      if (response.ok) {
         setImages([]);
         setSelectedImages([]);
         setNome('');
         setDescricao('');
-        setMessage('imagem inserido com sucesso!');
+        setMessage('Imagens inseridas com sucesso!');
       } else {
-        setMessage('Erro ao inserir produto');
+        setMessage('Erro ao inserir imagens');
       }
     } catch (error) {
       console.error('Erro na requisição:', error);
@@ -49,7 +48,7 @@ const InsurtImage: React.FC = () => {
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
-      const files = Array.from(event.target.files).slice(0, 5); 
+      const files = Array.from(event.target.files).slice(0, 5); // Limita a 5 imagens
     
       setImages(files);
       setSelectedImages(files.map(file => URL.createObjectURL(file)));
