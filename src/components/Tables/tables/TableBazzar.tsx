@@ -62,7 +62,7 @@ const TableTwo = () => {
 
         <div className="ml-auto h-12.5 w-15 rounded-md">
           <RedirectButton 
-            path="/insurt/bazza"
+            path="/insurt/bazzar"
             icon={<IoIosAddCircle/> }
             />
         </div>

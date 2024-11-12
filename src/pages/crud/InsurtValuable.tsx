@@ -22,6 +22,7 @@ const InsurtValuable: React.FC = () => {
         setNome('');
         setQuantidade('');
         setMessage('Produto inserido com sucesso!');
+        
       } else {
         setMessage('Erro ao inserir produto');
       }
