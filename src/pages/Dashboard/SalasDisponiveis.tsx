@@ -1,33 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import RedirectButton from '../../components/button/RedirectButton';
 import { IoIosAddCircle } from 'react-icons/io';
+import { FaTrash } from 'react-icons/fa';
 
 interface Ambiente {
   id: number;
-  data_reserva: string;
-  data: string;
-  hora_inicio: string;
-  hora_fim: string;
-  usuario: string;
-  ambiente: string;
+  nome: string;
+  tipo: string;
+  status: string;
+  descricao: string;
 }
 
-const ECommerce: React.FC = () => {
+const SalasDisponiveis: React.FC = () => {
   const [ambientes, setAmbientes] = useState<Ambiente[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
+
+  const userRole = localStorage.getItem('role');
+
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/reserva/index');
+        const response = await fetch('http://127.0.0.1:8000/api/ambiente/index');
         const data = await response.json();
   
+    
         console.log(data);
   
         // Acessa o array de reservas corretamente
-        if (Array.isArray(data.reservas)) {
-          setAmbientes(data.reservas);
+        if (Array.isArray(data)) {
+          setAmbientes(data);
         } else {
           throw new Error('Estrutura inesperada da resposta da API.');
         }
@@ -42,19 +45,22 @@ const ECommerce: React.FC = () => {
     fetchUsers();
   }, []);
 
+  const handleDelete = (id: number) => {
+    console.log(`Excluindo ambiente com ID: ${id}`);
+     fetch(`http://127.0.0.1:8000/api/ambiente/${id}/delete`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  };
+
   return (
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
       <div className="py-6 px-4 md:px-6 xl:px-7.5">
         <h4 className="text-xl font-semibold text-black dark:text-white">
-          Lista de salas agendaddaa
+          Ambientes
         </h4>
-        <div className="col-span-2 flex justify-end">
-            <RedirectButton 
-              path="/insurt/reserva"
-              icon={<IoIosAddCircle/> }
-              name='Agendar nova sala'
-            />
-        </div>
       </div>
 
       {/* Mensagens de Carregamento ou Erro */}
@@ -70,18 +76,14 @@ const ECommerce: React.FC = () => {
         <>
           <div className="grid grid-cols-6 border-t border-stroke py-4.5 px-4 dark:border-strokedark sm:grid-cols-8 md:px-6 2xl:px-7.5">
             <div className="col-span-2 flex items-center">
-              <p className="font-medium">Usuario</p>
-            </div>
-            <div className="col-span-2 flex items-center">
-              <p className="font-medium">data da reserva</p>
-            </div>
-            <div className="col-span-2 flex items-center">
-              <p className="font-medium">horario inicio / horario final</p>
-            </div>
-            <div className="col-span-2 flex items-center">
               <p className="font-medium">Ambiente</p>
             </div>
-
+            <div className="col-span-2 flex items-center">
+              <p className="font-medium">descrição</p>
+            </div>
+            <div className="col-span-2 flex items-center">
+              <p className="font-medium">andamento</p>
+            </div>
 
           </div>
 
@@ -93,24 +95,42 @@ const ECommerce: React.FC = () => {
             >
               <div className="col-span-2 flex items-center">
                 <p className="text-sm text-black dark:text-white">
-                  {ambientes.usuario}
+                  {ambientes.nome}
                 </p>
               </div>
               <div className="col-span-2 flex items-center">
                 <p className="text-sm text-black dark:text-white">
-                  {ambientes.data_reserva}
+                  {ambientes.descricao}
                 </p>
               </div>
               <div className="col-span-2 flex items-center">
                 <p className="text-sm text-black dark:text-white">
-                  {ambientes.hora_inicio} / {ambientes.hora_fim}
+                  {ambientes.status}
                 </p>
               </div>
-              <div className="col-span-2 flex items-center">
-                <p className="text-sm text-black dark:text-white">
-                  {ambientes.ambiente}
-                </p>
+
+              {userRole === 'admin' && (
+              <div className="ml-auto h-12.5 w-15 rounded-md">
+                <button onClick={() => handleDelete(ambientes.id)}>
+                  <FaTrash size={20} />
+                </button>
               </div>
+    
+              
+                )}
+            {userRole === 'admin' && (
+                <div className="ml-auto h-12.5 w-15 rounded-md">
+                    <RedirectButton 
+                    path={`/update/AboutUs/${ambientes.id}`}  
+                    icon={<IoIosAddCircle/> }
+                    name='Editar'
+                />
+                </div>
+            )}
+
+
+                
+
             </div>
           ))}
         </>
@@ -119,4 +139,4 @@ const ECommerce: React.FC = () => {
   );
 };
 
-export default ECommerce;
+export default SalasDisponiveis;

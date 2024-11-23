@@ -7,6 +7,7 @@ import SignUp from './pages/Authentication/SignUp';
 import Calendar from './pages/Calendar';
 import Chart from './pages/Chart';
 import ECommerce from './pages/Dashboard/ECommerce';
+import SalasDisponeis from './pages/Dashboard/SalasDisponiveis';
 import FormElements from './pages/Form/FormElements';
 import FormLayout from './pages/Form/FormLayout';
 import Profile from './pages/Profile';
@@ -62,6 +63,16 @@ function App() {
             <>
               <PageTitle title="eCommerce" />
               <ECommerce />
+            </>
+            }
+        />
+
+        <Route
+          path="/SalasDisponiveis"
+          element={
+            <>
+              <PageTitle title="Ambientes" />
+              <SalasDisponeis />
             </>
             }
         />
