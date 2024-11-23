@@ -25,7 +25,7 @@ import Insurt from './pages/crud/InsurtBazzar';
 // import { Table } from './components/TableSettings';
 import TablePosition from './components/Tables/tables/TablePosition';
 import InsurtReserva from './pages/crud/InsurtReserva';
-import InsurtOwner from './pages/crud/insurtOwner';
+import InsertAmbient from './pages/crud/insertAmbiente';
 import InsurtTransparency from './pages/crud/InsurtTransparency';
 import InsurtValuable from './pages/crud/InsurtValuable';
 import TableEvent from './components/Tables/tables/TableEvent';
@@ -257,11 +257,11 @@ function App() {
           }
         />
         <Route
-          path="/insurt/owner"
+          path="/insurt/ambiente"
           element={
             <>
-              <PageTitle title="insurt" />
-              <InsurtOwner/>
+              <PageTitle title="insert" />
+              <InsertAmbient/>
             </>
           }
         />

@@ -61,6 +61,15 @@ const SalasDisponiveis: React.FC = () => {
         <h4 className="text-xl font-semibold text-black dark:text-white">
           Ambientes
         </h4>
+        {userRole === 'admin' && (
+        <div className="col-span-2 flex justify-end">
+            <RedirectButton 
+              path="/insurt/ambiente"
+              icon={<IoIosAddCircle/> }
+              name='Criar novo ambiente'
+            />
+        </div>
+          )}
       </div>
 
       {/* Mensagens de Carregamento ou Erro */}

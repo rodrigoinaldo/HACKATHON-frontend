@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -10,17 +11,20 @@ interface Ambiente {
 }
 
 const UpdateAboutUs: React.FC = () => {
-  const { id } = useParams<{ id: string }>(); // Extrai o ID da URL
+  const { id } = useParams<{ id: string }>(); // id é extraído como string
   const [name, setName] = useState<string>('');
-  const [description, setDescription] = useState<string>('');
+  const [descricao, setDescricao] = useState<string>('');
   const [status, setStatus] = useState<string>(''); // Status
   const [message, setMessage] = useState<string | null>(null);
   const [tipo, setTipo] = useState<string>('');
 
+  // Converte o id para número
+  const numericId = id ? Number(id) : 0;
+
   // Carrega os dados do item específico ao montar o componente
   useEffect(() => {
-    if (id) {
-      fetch(`http://127.0.0.1:8000/api/ambiente/${id}`)
+    if (numericId) {
+      fetch(`http://127.0.0.1:8000/api/ambiente/${numericId}`)
         .then((response) => {
           if (!response.ok) {
             throw new Error('Erro ao buscar dados');
@@ -29,7 +33,7 @@ const UpdateAboutUs: React.FC = () => {
         })
         .then((data: Ambiente) => {
           setName(data.nome); // Preenche o campo com o nome atual
-          setDescription(data.descricao); // Preenche o campo com a descrição atual
+          setDescricao(data.descricao); // Preenche o campo com a descrição atual
           setStatus(data.status); // Preenche o campo status com o valor atual
           setTipo(data.tipo);
         })
@@ -38,34 +42,37 @@ const UpdateAboutUs: React.FC = () => {
           setMessage('Erro ao carregar dados.');
         });
     }
-  }, [id]);
+  }, [numericId]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  
-    const updatedData = { name, description, status, tipo };
-  
+
+    // Objeto a ser enviado para o servidor
+    const updatedData = { nome: name, descricao, status, tipo };
+
+    console.log(updatedData);
+
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/ambiente/${id}/update`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedData),
-      });
-  
-      if (response.ok) {
+      const response = await axios.put(
+        `http://localhost:8000/api/ambiente/${numericId}/update`, // Usando numericId
+        updatedData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      if (response.status === 200) {
         setMessage('Dados atualizados com sucesso!');
       } else {
-        const errorData = await response.json();
-        setMessage(`Erro ao atualizar os dados: ${errorData.message}`);
+        setMessage(`Erro ao atualizar os dados: ${response.data.message || 'Desconhecido'}`);
       }
     } catch (error) {
       console.error('Erro na requisição:', error);
       setMessage('Erro na conexão com o servidor');
     }
   };
-  
 
   return (
     <>
@@ -79,7 +86,7 @@ const UpdateAboutUs: React.FC = () => {
               id="name"
               className="w-full rounded border border-stroke bg-gray py-3 pl-11.5 pr-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
               type="text"
-              value={name} // O valor atual é exibido no campo
+              value={name}
               onChange={(e) => setName(e.target.value)}
             />
           </div>
@@ -93,21 +100,21 @@ const UpdateAboutUs: React.FC = () => {
             id="description"
             className="w-full rounded border border-stroke bg-gray py-3 px-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
             type="text"
-            value={description} // O valor atual é exibido no campo
-            onChange={(e) => setDescription(e.target.value)}
+            value={descricao}
+            onChange={(e) => setDescricao(e.target.value)}
           />
         </div>
 
         <div className="mb-5.5">
-          <label className="mb-3 block text-sm font-medium text-black dark:text-white" htmlFor="description">
+          <label className="mb-3 block text-sm font-medium text-black dark:text-white" htmlFor="tipo">
             Tipo
           </label>
           <input
-            id="description"
+            id="tipo"
             className="w-full rounded border border-stroke bg-gray py-3 px-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
             type="text"
-            value={tipo} // O valor atual é exibido no campo
-            onChange={(e) => setDescription(e.target.value)}
+            value={tipo}
+            onChange={(e) => setTipo(e.target.value)}
           />
         </div>
 

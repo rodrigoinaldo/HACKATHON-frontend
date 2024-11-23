@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 // import { Link } from 'react-router-dom';
-import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
+// import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
 // import Logo from '../../images/logo/logo.svg';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import LoginImage from './logo.svg';
+import LoginImage from './logo.png';
 
 const SignIn: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -30,9 +30,9 @@ const SignIn: React.FC = () => {
       if (token && role) {
         localStorage.setItem('token', token);
         localStorage.setItem('role', role)
-        localStorage.setItem('user', user ); 
-         navigate('/ecommerce');
-         window.location.reload();
+        localStorage.setItem('user', user);
+        navigate('/ecommerce');
+        window.location.reload();
       } else {
         setErrorMessage('Falha no login. Verifique suas credenciais.');
       }
@@ -49,11 +49,11 @@ const SignIn: React.FC = () => {
           {/* Lado esquerdo */}
           <div className="hidden xl:flex xl:w-1/2 justify-center items-center">
             <div className="flex flex-col items-center justify-center text-center">
-              <h1 className="text-4xl font-bold text-[#89b72d] mb-4">Casa da Paz</h1>
+              <img src={LoginImage} alt="Imagem de Login" className="w-60 mr-4 mb-4" />
               <p className="text-gray-700 mb-5">Bem-vindo! Faça login para acessar sua conta.</p>
-              <img src={LoginImage} alt="Imagem de Login" className="w-3/4" />
             </div>
           </div>
+
 
           {/* Lado direito */}
           <div className="w-full xl:w-1/2">
