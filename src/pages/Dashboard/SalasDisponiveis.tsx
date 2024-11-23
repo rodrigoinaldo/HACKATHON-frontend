@@ -119,7 +119,7 @@ const SalasDisponiveis: React.FC = () => {
               </div>
 
               {userRole === 'admin' && (
-              <div className="ml-auto h-12.5 w-15 rounded-md">
+              <div className="ml-auto  h-12.5 w-15 rounded-md mt-6">
                 <button onClick={() => handleDelete(ambientes.id)}>
                   <FaTrash size={20} />
                 </button>
@@ -128,7 +128,7 @@ const SalasDisponiveis: React.FC = () => {
               
                 )}
             {userRole === 'admin' && (
-                <div className="ml-auto h-12.5 w-15 rounded-md">
+                <div className="ml-auto h-12.5 w-15 rounded-md mt-4">
                     <RedirectButton 
                     path={`/update/AboutUs/${ambientes.id}`}  
                     icon={<IoIosAddCircle/> }

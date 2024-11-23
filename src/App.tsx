@@ -32,6 +32,7 @@ import TableEvent from './components/Tables/tables/TableEvent';
 import InsurtEvents from './pages/crud/InsurtEvents';
 import TableAboutUs from './components/Tables/tables/TableAboutUs';
 import UpdateAboutUs from './pages/crud/update/UpdateAboutUs';
+import UpdateReserva from './pages/crud/update/UpdateReserva';
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -298,6 +299,16 @@ function App() {
             <>
               <PageTitle title="insurt" />
               <UpdateAboutUs/>
+            </>
+          }
+        />
+
+        <Route
+          path="/update/reserva/:id"
+          element={
+            <>
+              <PageTitle title="insurt" />
+              <UpdateReserva/>
             </>
           }
         />
