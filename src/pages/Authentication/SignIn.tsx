@@ -20,12 +20,19 @@ const SignIn: React.FC = () => {
         password,
       });
 
+      console.log(response.data);
+
       // Verifica se o token está em response.data.data.token
-      const token = response.data?.data?.token;
-      if (token) {
+      const token = response.data.access_token;
+      const role = response.data.role;
+      const user = response.data.user;
+
+      if (token && role) {
         localStorage.setItem('token', token);
-        navigate('/ecommerce');
-        window.location.reload();
+        localStorage.setItem('role', role)
+        localStorage.setItem('user', user ); 
+         navigate('/ecommerce');
+         window.location.reload();
       } else {
         setErrorMessage('Falha no login. Verifique suas credenciais.');
       }

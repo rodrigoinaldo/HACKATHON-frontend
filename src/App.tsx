@@ -23,7 +23,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Insurt from './pages/crud/InsurtBazzar';
 // import { Table } from './components/TableSettings';
 import TablePosition from './components/Tables/tables/TablePosition';
-import InsurtImage from './pages/crud/InsurtImage';
+import InsurtReserva from './pages/crud/InsurtReserva';
 import InsurtOwner from './pages/crud/insurtOwner';
 import InsurtTransparency from './pages/crud/InsurtTransparency';
 import InsurtValuable from './pages/crud/InsurtValuable';
@@ -237,11 +237,11 @@ function App() {
           }
         />
         <Route
-          path="/insurt/image"
+          path="/insurt/reserva"
           element={
             <>
               <PageTitle title="insurt" />
-              <InsurtImage/>
+              <InsurtReserva/>
             </>
           }
         />
