@@ -2,59 +2,88 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-interface Ambiente {
+interface Reserva {
   id: number;
-  nome: string;
-  tipo: string;
+  usuario: string;
+  ambiente: string;
+  data_reserva: string;
+  hora_inicio: string;
+  hora_fim: string;
   status: string;
-  descricao: string;
 }
 
-const UpdateAboutUs: React.FC = () => {
-  const { id } = useParams<{ id: string }>(); // id é extraído como string
-  const [name, setName] = useState<string>('');
-  const [descricao, setDescricao] = useState<string>('');
-  const [status, setStatus] = useState<string>(''); // Status
+const UpdateReserva: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  const [user_id, setUser_id] = useState<string>(''); // ID do usuário
+  const [ambiente_id, setAmbiente_id] = useState<string>(''); // ID do ambiente
+  const [data_reserva, setData_reserva] = useState<string>('');
+  const [hora_inicio, setHora_inicio] = useState<string>('');
+  const [hora_fim, setHora_fim] = useState<string>('');
+  const [status, setStatus] = useState<string>('');
   const [message, setMessage] = useState<string | null>(null);
-  const [tipo, setTipo] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [ambientes, setAmbientes] = useState<any[]>([]);
 
-  // Converte o id para número
   const numericId = id ? Number(id) : 0;
+  const userid = localStorage.getItem('user');
 
-  // Carrega os dados do item específico ao montar o componente
   useEffect(() => {
-    if (numericId) {
-      fetch(`http://127.0.0.1:8000/api/ambiente/${numericId}`)
+    if (id) {
+      axios
+        .get(`http://127.0.0.1:8000/api/reserva/${numericId}`)
         .then((response) => {
-          if (!response.ok) {
-            throw new Error('Erro ao buscar dados');
-          }
-          return response.json();
-        })
-        .then((data: Ambiente) => {
-          setName(data.nome); // Preenche o campo com o nome atual
-          setDescricao(data.descricao); // Preenche o campo com a descrição atual
-          setStatus(data.status); // Preenche o campo status com o valor atual
-          setTipo(data.tipo);
+          console.log(response);
+          const data: Reserva = response.data;
+          setUser_id(data.usuario); // Armazenando o ID do usuário
+          setAmbiente_id(data.ambiente); // Armazenando o ID do ambiente
+          setData_reserva(data.data_reserva);
+          setHora_inicio(data.hora_inicio);
+          setHora_fim(data.hora_fim);
+          setStatus(data.status);
         })
         .catch((error) => {
           console.error('Erro ao buscar dados:', error);
           setMessage('Erro ao carregar dados.');
+        })
+        .finally(() => {
+          setIsLoading(false);
         });
     }
-  }, [numericId]);
+  }, [id]);
+
+  useEffect(() => {
+    const fetchAmbientes = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/api/ambiente/index');  // Ajuste a URL da sua API
+        setAmbientes(response.data);  // Supondo que sua API retorne um array de ambientes
+      } catch (error) {
+        console.error('Erro ao carregar os ambientes:', error);
+        setMessage('Erro ao carregar os ambientes');
+      }
+    };
+
+    fetchAmbientes();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Objeto a ser enviado para o servidor
-    const updatedData = { nome: name, descricao, status, tipo };
+    // Preparando os dados para envio no update
+    const updatedData = { 
+      user_id: userid, // Enviando apenas o ID do usuário
+      ambiente_id, // Enviando apenas o ID do ambiente
+      data_reserva, 
+      hora_inicio, 
+      hora_fim, 
+      status 
+    };
+
 
     console.log(updatedData);
 
     try {
       const response = await axios.put(
-        `http://localhost:8000/api/ambiente/${numericId}/update`, // Usando numericId
+        `http://127.0.0.1:8000/api/reserva/${id}/update`,
         updatedData,
         {
           headers: {
@@ -70,56 +99,93 @@ const UpdateAboutUs: React.FC = () => {
       }
     } catch (error) {
       console.error('Erro na requisição:', error);
-      setMessage('Erro na conexão com o servidor');
+      setMessage('Erro na conexão com o servidor.');
     }
   };
 
+  if (isLoading) {
+    return <p>Carregando dados...</p>;
+  }
+
   return (
-    <>
+    <div>
       <form onSubmit={handleSubmit}>
         <div className="mb-5.5">
-          <label className="mb-3 block text-sm font-medium text-black dark:text-white" htmlFor="name">
-            Nome
-          </label>
-          <div className="relative">
-            <input
-              id="name"
-              className="w-full rounded border border-stroke bg-gray py-3 pl-11.5 pr-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-        </div>
-
-        <div className="mb-5.5">
-          <label className="mb-3 block text-sm font-medium text-black dark:text-white" htmlFor="description">
-            Descrição
+          <label htmlFor="user_id" className="mb-3 block text-sm font-medium text-black dark:text-white">
+            Usuário
           </label>
           <input
-            id="description"
-            className="w-full rounded border border-stroke bg-gray py-3 px-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+            id="user_id"
             type="text"
-            value={descricao}
-            onChange={(e) => setDescricao(e.target.value)}
+            className="w-full rounded border border-stroke bg-gray py-3 px-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+            value={user_id}
+            readOnly
           />
         </div>
 
         <div className="mb-5.5">
-          <label className="mb-3 block text-sm font-medium text-black dark:text-white" htmlFor="tipo">
-            Tipo
+          <label htmlFor="ambiente_id" className="mb-3 block text-sm font-medium text-black dark:text-white">
+            Ambiente
+          </label>
+          <select
+            id="ambiente_id"
+            className="w-full rounded border border-stroke bg-gray py-3 px-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+            value={ambiente_id}
+            onChange={(e) => setAmbiente_id(e.target.value)} // ID do ambiente
+          >
+            {ambientes.length === 0 ? (
+              <option>Carregando ambientes...</option>
+            ) : (
+              ambientes.map((ambiente) => (
+                <option key={ambiente.id} value={ambiente.id}> {/* Usando o ID do ambiente */}
+                  {ambiente.nome} {/* Exibindo o nome, mas enviando o ID */}
+                </option>
+              ))
+            )}
+          </select>
+        </div>
+
+        <div className="mb-5.5">
+          <label htmlFor="data_reserva" className="mb-3 block text-sm font-medium text-black dark:text-white">
+            Data da Reserva
           </label>
           <input
-            id="tipo"
+            id="data_reserva"
+            type="date"
             className="w-full rounded border border-stroke bg-gray py-3 px-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
-            type="text"
-            value={tipo}
-            onChange={(e) => setTipo(e.target.value)}
+            value={data_reserva}
+            onChange={(e) => setData_reserva(e.target.value)}
           />
         </div>
 
         <div className="mb-5.5">
-          <label className="mb-3 block text-sm font-medium text-black dark:text-white" htmlFor="status">
+          <label htmlFor="hora_inicio" className="mb-3 block text-sm font-medium text-black dark:text-white">
+            Hora de Início
+          </label>
+          <input
+            id="hora_inicio"
+            type="time"
+            className="w-full rounded border border-stroke bg-gray py-3 px-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+            value={hora_inicio}
+            onChange={(e) => setHora_inicio(e.target.value)}
+          />
+        </div>
+
+        <div className="mb-5.5">
+          <label htmlFor="hora_fim" className="mb-3 block text-sm font-medium text-black dark:text-white">
+            Hora de Fim
+          </label>
+          <input
+            id="hora_fim"
+            type="time"
+            className="w-full rounded border border-stroke bg-gray py-3 px-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+            value={hora_fim}
+            onChange={(e) => setHora_fim(e.target.value)}
+          />
+        </div>
+
+        <div className="mb-5.5">
+          <label htmlFor="status" className="mb-3 block text-sm font-medium text-black dark:text-white">
             Status
           </label>
           <select
@@ -129,9 +195,8 @@ const UpdateAboutUs: React.FC = () => {
             onChange={(e) => setStatus(e.target.value)}
           >
             <option value="">Selecione o status</option>
-            <option value="reservado">Reservado</option>
-            <option value="disponivel">Disponível</option>
-            <option value="manutencao">Manutenção</option>
+            <option value="ativo">Ativo</option>
+            <option value="cancelado">Cancelado</option>
           </select>
         </div>
 
@@ -144,8 +209,8 @@ const UpdateAboutUs: React.FC = () => {
 
         {message && <p className="mt-4 text-sm">{message}</p>}
       </form>
-    </>
+    </div>
   );
 };
 
-export default UpdateAboutUs;
+export default UpdateReserva;
