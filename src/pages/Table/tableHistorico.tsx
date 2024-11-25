@@ -1,6 +1,6 @@
 
 import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
-import TablePosition from '../../components/Tables/tables/TablePosition';
+import TablePosition from '../../components/Tables/tables/TableHistorico';
 
 const Tables = () => {
   return (

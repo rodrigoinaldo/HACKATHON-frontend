@@ -52,7 +52,8 @@ const ECommerce: React.FC = () => {
 
   const handleDelete = (id: number) => {
     console.log(`Excluindo ambiente com ID: ${id}`);
-    fetch(`http://127.0.0.1:8000/api/reserva/${id}/delete`, {
+  
+    fetch(`http://127.0.0.1:8000/api/reserva/${id}/delete/${userId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

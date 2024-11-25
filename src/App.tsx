@@ -23,7 +23,7 @@ import DefaultLayout from './layout/DefaultLayout';
 import ProtectedRoute from './components/ProtectedRoute';
 import Insurt from './pages/crud/InsurtBazzar';
 // import { Table } from './components/TableSettings';
-import TablePosition from './components/Tables/tables/TablePosition';
+import TablePosition from './components/Tables/tables/TableHistorico';
 import InsurtReserva from './pages/crud/InsurtReserva';
 import InsertAmbient from './pages/crud/insertAmbiente';
 import InsurtTransparency from './pages/crud/InsurtTransparency';
@@ -159,7 +159,7 @@ function App() {
           }
         />
         <Route
-          path="/tables/position"
+          path="/tables/historico"
           element={
             <>
               <PageTitle title="Tabela" />

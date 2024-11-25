@@ -50,11 +50,14 @@ const InsurtReserva: React.FC = () => {
     formData.append('user_id', user);  
     formData.append('status', 'ativo');
 
+
+   
     try {
       const response = await fetch('http://127.0.0.1:8000/api/reserva/store', {
         method: 'POST',
         body: formData,
       });
+      console.log(response);
       
       if (response.ok) {
         setData('');  // Limpa o campo de data

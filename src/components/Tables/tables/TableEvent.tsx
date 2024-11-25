@@ -60,6 +60,7 @@ const TableEvent = () => {
           <RedirectButton 
             path="/insurt/event"
             icon={<IoIosAddCircle/> }
+            name='Novo Evento'
             />
         </div>
 

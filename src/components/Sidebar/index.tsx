@@ -193,6 +193,19 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               Reservas realizadas
                             </NavLink>
                           </li>
+
+                          
+                          <li>
+                            <NavLink
+                              to="/tables/historico"
+                              className={({ isActive }) =>
+                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium duration-300 ease-in-out hover:text-white ' +
+                                (isActive && '!text-white')
+                              }
+                            >
+                              Historico
+                            </NavLink>
+                          </li>
                         </ul>
                       </div>
 

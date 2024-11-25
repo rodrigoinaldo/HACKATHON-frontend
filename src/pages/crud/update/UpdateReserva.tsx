@@ -55,6 +55,7 @@ const UpdateReserva: React.FC = () => {
     const fetchAmbientes = async () => {
       try {
         const response = await axios.get('http://127.0.0.1:8000/api/ambiente/index');  // Ajuste a URL da sua API
+        console.log(response.data);
         setAmbientes(response.data);  // Supondo que sua API retorne um array de ambientes
       } catch (error) {
         console.error('Erro ao carregar os ambientes:', error);
@@ -131,7 +132,7 @@ const UpdateReserva: React.FC = () => {
             id="ambiente_id"
             className="w-full rounded border border-stroke bg-gray py-3 px-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
             value={ambiente_id}
-            onChange={(e) => setAmbiente_id(e.target.value)} // ID do ambiente
+            onChange={(e) => setAmbiente_id(e.target.value)} // Atualiza o estado com o ID do ambiente
           >
             {ambientes.length === 0 ? (
               <option>Carregando ambientes...</option>
