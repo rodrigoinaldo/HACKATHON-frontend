@@ -16,7 +16,7 @@ const TablePosition = () => {
   const [dataFiltro, setDataFiltro] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  
+
   const userId = localStorage.getItem('user');
 
   // Busca os dados do histórico do usuário
@@ -43,7 +43,6 @@ const TablePosition = () => {
       });
   }, [userId]);
 
-
   // Filtro baseado nos critérios
   const historicoFiltrado = historico.filter((item) => {
     return (
@@ -56,45 +55,43 @@ const TablePosition = () => {
   return (
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
       <div className="py-6 px-4 md:px-6 xl:px-7.5">
-        <h4 className="text-xl font-semibold text-black dark:text-white mt-8">
-          Histórico de alterações
-        </h4>
-      </div>
+        <div className="flex justify-between items-center">
+          <h4 className="text-xl font-semibold text-black dark:text-white mt-8">Histórico de alterações</h4>
 
-      {/* Campos de filtro */}
-      <div className="py-4 px-6">
-        <div className="flex space-x-4">
-          <div>
-            <h2>Filtrar ambiente:</h2>
-            <input
-              type="text"
-              placeholder="Filtrar ambiente..."
-              value={ambienteFiltro}
-              onChange={(e) => setAmbienteFiltro(e.target.value)}
-              className="p-2 border border-gray-300 rounded-md"
-            />
-          </div>
+          {/* Campos de filtro */}
+          <div className="flex space-x-4">
+            <div>
+              <h2>Filtrar ambiente:</h2>
+              <input
+                type="text"
+                placeholder="Filtrar ambiente..."
+                value={ambienteFiltro}
+                onChange={(e) => setAmbienteFiltro(e.target.value)}
+                className="p-2 border border-gray-300 rounded-md"
+              />
+            </div>
 
-          <div>
-            <h2>Filtrar usuário:</h2>
-            <input
-              type="text"
-              placeholder="Filtrar usuário..."
-              value={usuarioFiltro}
-              onChange={(e) => setUsuarioFiltro(e.target.value)}
-              className="p-2 border border-gray-300 rounded-md"
-            />
-          </div>
+            <div>
+              <h2>Filtrar usuário:</h2>
+              <input
+                type="text"
+                placeholder="Filtrar usuário..."
+                value={usuarioFiltro}
+                onChange={(e) => setUsuarioFiltro(e.target.value)}
+                className="p-2 border border-gray-300 rounded-md"
+              />
+            </div>
 
-          <div>
-            <h2>Filtrar data:</h2>
-            <input
-              type="text"
-              placeholder="Filtrar data..."
-              value={dataFiltro}
-              onChange={(e) => setDataFiltro(e.target.value)}
-              className="p-2 border border-gray-300 rounded-md"
-            />
+            <div>
+              <h2>Filtrar data:</h2>
+              <input
+                type="text"
+                placeholder="Filtrar data..."
+                value={dataFiltro}
+                onChange={(e) => setDataFiltro(e.target.value)}
+                className="p-2 border border-gray-300 rounded-md"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -133,7 +130,6 @@ const TablePosition = () => {
               <div className="col-span-2 flex items-center">
                 <p className="text-sm text-black dark:text-white">{item.usuario_id}</p>
               </div>
-
             </div>
           ))}
         </>

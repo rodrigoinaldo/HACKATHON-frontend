@@ -8,11 +8,18 @@ const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
+  
+
   const handleLogout = async () => {
     localStorage.removeItem('token');
     // Redirecione para a tela de login
     navigate('/');
     window.location.reload();
+  };
+
+  const handleManageUsers = () => { 
+    navigate('/manage-users'); // Altere o caminho conforme necessário 
+    setDropdownOpen(false); 
   };
 
   return (
@@ -78,6 +85,7 @@ const DropdownUser = () => {
             </svg>
             Log Out
           </button>
+
         </div>
       )}
       {/* Dropdown End */}

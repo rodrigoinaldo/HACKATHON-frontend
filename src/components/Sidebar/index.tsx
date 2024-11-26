@@ -9,6 +9,7 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
+  const role = localStorage.getItem('role');
   const location = useLocation();
   const { pathname } = location;
 
@@ -206,6 +207,20 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               Historico
                             </NavLink>
                           </li>
+
+                          {role === 'admin' && (
+                          <li>
+                            <NavLink
+                              to="/tables/users"
+                              className={({ isActive }) =>
+                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium duration-300 ease-in-out hover:text-white ' +
+                                (isActive && '!text-white')
+                              }
+                            >
+                              Usurio
+                            </NavLink>
+                          </li>
+                          )}
                         </ul>
                       </div>
 

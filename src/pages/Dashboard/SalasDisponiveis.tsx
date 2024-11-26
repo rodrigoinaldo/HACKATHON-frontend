@@ -16,7 +16,6 @@ const SalasDisponiveis: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-
   const userRole = localStorage.getItem('role');
 
   useEffect(() => {
@@ -24,11 +23,9 @@ const SalasDisponiveis: React.FC = () => {
       try {
         const response = await fetch('http://127.0.0.1:8000/api/ambiente/index');
         const data = await response.json();
-  
-    
+
         console.log(data);
-  
-        // Acessa o array de reservas corretamente
+
         if (Array.isArray(data)) {
           setAmbientes(data);
         } else {
@@ -47,32 +44,27 @@ const SalasDisponiveis: React.FC = () => {
 
   const handleDelete = (id: number) => {
     console.log(`Excluindo ambiente com ID: ${id}`);
-     fetch(`http://127.0.0.1:8000/api/ambiente/${id}/delete`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+    fetch(`http://127.0.0.1:8000/api/ambiente/${id}/delete`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
   };
 
   return (
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
-      <div className="py-6 px-4 md:px-6 xl:px-7.5">
-        <h4 className="text-xl font-semibold text-black dark:text-white">
-          Ambientes
-        </h4>
+      <div className="py-6 px-4 md:px-6 xl:px-7.5 flex justify-between items-center">
+        <h4 className="text-xl font-semibold text-black dark:text-white">Ambientes</h4>
         {userRole === 'admin' && (
-        <div className="col-span-2 flex justify-end">
-            <RedirectButton 
-              path="/insurt/ambiente"
-              icon={<IoIosAddCircle/> }
-              name='Criar novo ambiente'
-            />
-        </div>
-          )}
+          <RedirectButton
+            path="/insurt/ambiente"
+            icon={<IoIosAddCircle />}
+            name="Criar novo ambiente"
+          />
+        )}
       </div>
 
-      {/* Mensagens de Carregamento ou Erro */}
       {loading && (
         <p className="text-center text-gray-500 py-4">Carregando salas...</p>
       )}
@@ -80,7 +72,6 @@ const SalasDisponiveis: React.FC = () => {
         <p className="text-center text-red-500 py-4">{error}</p>
       )}
 
-      {/* Cabeçalho da Tabela */}
       {!loading && !error && (
         <>
           <div className="grid grid-cols-6 border-t border-stroke py-4.5 px-4 dark:border-strokedark sm:grid-cols-8 md:px-6 2xl:px-7.5">
@@ -88,58 +79,48 @@ const SalasDisponiveis: React.FC = () => {
               <p className="font-medium">Ambiente</p>
             </div>
             <div className="col-span-2 flex items-center">
-              <p className="font-medium">descrição</p>
+              <p className="font-medium">Descrição</p>
             </div>
             <div className="col-span-2 flex items-center">
-              <p className="font-medium">andamento</p>
+              <p className="font-medium">Andamento</p>
             </div>
-
+            {userRole === 'admin' && (
+              <div className="col-span-1 flex items-center justify-end">
+                <p className="font-medium">Ações</p>
+              </div>
+            )}
           </div>
 
-          {/* Lista de Usuários */}
-          {ambientes.map((ambientes) => (
+          {ambientes.map((ambiente) => (
             <div
-              className="grid grid-cols-6 border-t border-stroke py-4.5 px-4 dark:border-strokedark sm:grid-cols-8 md:px-6 2xl:px-7.5"
-              key={ambientes.id}
+              className="grid grid-cols-6 border-t border-stroke py-4.5 px-4 dark:border-strokedark sm:grid-cols-8 md:px-6 2xl:px-7.5 items-center"
+              key={ambiente.id}
             >
-              <div className="col-span-2 flex items-center">
-                <p className="text-sm text-black dark:text-white">
-                  {ambientes.nome}
-                </p>
+              <div className="col-span-2">
+                <p className="text-sm text-black dark:text-white">{ambiente.nome}</p>
               </div>
-              <div className="col-span-2 flex items-center">
-                <p className="text-sm text-black dark:text-white">
-                  {ambientes.descricao}
-                </p>
+              <div className="col-span-2">
+                <p className="text-sm text-black dark:text-white">{ambiente.descricao}</p>
               </div>
-              <div className="col-span-2 flex items-center">
-                <p className="text-sm text-black dark:text-white">
-                  {ambientes.status}
-                </p>
+              <div className="col-span-2">
+                <p className="text-sm text-black dark:text-white">{ambiente.status}</p>
               </div>
 
               {userRole === 'admin' && (
-              <div className="ml-auto  h-12.5 w-15 rounded-md mt-6">
-                <button onClick={() => handleDelete(ambientes.id)}>
-                  <FaTrash size={20} />
-                </button>
-              </div>
-    
-              
-                )}
-            {userRole === 'admin' && (
-                <div className="ml-auto h-12.5 w-15 rounded-md mt-4">
-                    <RedirectButton 
-                    path={`/update/AboutUs/${ambientes.id}`}  
-                    icon={<IoIosAddCircle/> }
-                    name='Editar'
-                />
+                <div className="ml-auto flex justify-end space-x-5">
+                  <RedirectButton
+                    path={`/update/AboutUs/${ambiente.id}`}
+                    icon={<IoIosAddCircle />}
+                    name="Editar"
+                  />
+                  <button
+                    className="text-red-500 hover:text-red-700 transition"
+                    onClick={() => handleDelete(ambiente.id)}
+                  >
+                    <FaTrash size={20} />
+                  </button>
                 </div>
-            )}
-
-
-                
-
+              )}
             </div>
           ))}
         </>

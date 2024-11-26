@@ -33,6 +33,8 @@ import InsurtEvents from './pages/crud/InsurtEvents';
 import TableAboutUs from './components/Tables/tables/TableAboutUs';
 import UpdateAboutUs from './pages/crud/update/UpdateAboutUs';
 import UpdateReserva from './pages/crud/update/UpdateReserva';
+import UpdateUser from './pages/crud/update/UpdateUser';
+import InsertUser from './pages/crud/insertUser';
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -225,7 +227,7 @@ function App() {
           index
           element={
             <>
-              <PageTitle title="Painel Casa da Paz" />
+              <PageTitle title="UniAlfa" />
               <SignIn />
             </>
           }
@@ -312,7 +314,29 @@ function App() {
             </>
           }
         />
+        <Route
+          path="/update/user/:id"
+          element={
+            <>
+              <PageTitle title="insurt" />
+              <UpdateUser/>
+            </>
+          }
+        /> 
+
+        <Route
+          path="/registrar"
+          element={
+            <>
+              <PageTitle title="insurt" />
+              <InsertUser/>
+            </>
+          }
+        /> 
       </Routes>
+
+
+      
     </DefaultLayout>
   );
 }
